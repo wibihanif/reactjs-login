@@ -4,6 +4,8 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import Counter from "./pages/Counter"
 import Text from "./pages/Text"
+import List from "./pages/List"
+import Filter from "./pages/Filter"
 
 const data = [
   {
@@ -57,6 +59,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/text" element={<Text />} />
+        <Route path="/list" element={<List />} />
+        <Route path="/filter" element={<Filter />} />
       </Routes>
     </div>
   )
