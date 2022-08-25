@@ -12,6 +12,7 @@ const Filter = () => {
   ])
   const [inputFilter, setInputFilter] = useState("") // untuk yang kita ketik
   const [currentFilter, setCurrentFilter] = useState("") // untuk simpen filter
+  const [inputAddFruit, setInputAddFruit] = useState("")
 
   const renderFruits = () => {
     return fruits.map((val) => {
@@ -25,6 +26,20 @@ const Filter = () => {
     setCurrentFilter(inputFilter)
   }
 
+  const addFruitBtnHandler = () => {
+    if (inputAddFruit) {
+      // 1. Copy array
+      // 2. Tambahin item
+      // 3. Timpa array state dengan array baru
+      let newFruits = [...fruits]
+      newFruits.push(inputAddFruit)
+      setFruits(newFruits)
+      setInputAddFruit("")
+    } else {
+      alert("Input masih kosong")
+    }
+  }
+
   return (
     <div>
       <h1>Filter Page</h1>
@@ -33,6 +48,13 @@ const Filter = () => {
         onChange={(event) => setInputFilter(event.target.value)}
       />
       <button onClick={filterBtnHandler}>Filter</button>
+      <br />
+      <input
+        type="text"
+        onChange={(event) => setInputAddFruit(event.target.value)}
+        value={inputAddFruit}
+      />
+      <button onClick={addFruitBtnHandler}>Add Fruit</button>
       <ul>{renderFruits()}</ul>
     </div>
   )
