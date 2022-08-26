@@ -3,9 +3,10 @@ import { Routes, Route, Link } from "react-router-dom"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Counter from "./pages/Counter"
-import Text from "./pages/Text"
+import TextPage from "./pages/Text"
 import List from "./pages/List"
 import Filter from "./pages/Filter"
+import { Text, UnorderedList, ListItem, Box } from "@chakra-ui/react"
 
 const data = [
   {
@@ -41,28 +42,30 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Hello World!</h1>
-      <ul>
-        <li>
+    <Box>
+      <Text fontSize={"3xl"} fontWeight="bold" color="blue.600">
+        Hello World!
+      </Text>
+      <UnorderedList>
+        <ListItem>
           <Link to="/home">Home</Link>
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           <Link to="/about">About</Link>
-        </li>
-        <li>
+        </ListItem>
+        <ListItem>
           <Link to="/counter">Counter</Link>
-        </li>
-      </ul>
+        </ListItem>
+      </UnorderedList>
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/counter" element={<Counter />} />
-        <Route path="/text" element={<Text />} />
+        <Route path="/text" element={<TextPage />} />
         <Route path="/list" element={<List />} />
         <Route path="/filter" element={<Filter />} />
       </Routes>
-    </div>
+    </Box>
   )
 }
 

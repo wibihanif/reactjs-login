@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { useState } from "react"
 
 const Filter = () => {
@@ -16,7 +17,7 @@ const Filter = () => {
 
   const renderFruits = () => {
     return fruits.map((val) => {
-      if (val.includes(currentFilter)) {
+      if (val.toLowerCase().includes(currentFilter.toLowerCase())) {
         return <li>{val}</li>
       }
     })

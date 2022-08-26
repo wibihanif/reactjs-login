@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Text, Box, Button, Stack, HStack, Flex } from "@chakra-ui/react"
 
 // const arr = [1, 2, 3, 4, 5]
 // const [a, b, c] = arr
@@ -47,17 +48,36 @@ const Counter = () => {
   }, [counter])
 
   return (
-    <div>
-      <h1>Counter Page</h1>
+    <Box marginTop="4">
+      <Text fontWeight="bold" fontSize="2xl">
+        Counter Page
+      </Text>
 
-      {showCounter ? <h2>{counter}</h2> : null}
-
-      <button onClick={toggleCounter}>Toggle Counter Visibility</button>
-
-      <button onClick={decrementCounter}>Kurang</button>
-      <button onClick={resetCounter}>Reset</button>
-      <button onClick={incrementCounter}>Tambah</button>
-    </div>
+      {/* <Flex direction="column" alignItems="center"> */}
+      {showCounter ? (
+        <Text fontSize="4xl" fontWeight="bold">
+          {counter}
+        </Text>
+      ) : null}
+      {/** Div yang memiliki display flex dan direction column */}
+      <Stack marginTop="10" alignItems="center">
+        <HStack width="400px" spacing="5">
+          <Button flex={1} colorScheme="red" onClick={decrementCounter}>
+            Kurang
+          </Button>
+          <Button flex={2} colorScheme="twitter" onClick={resetCounter}>
+            Reset
+          </Button>
+          <Button flex={1} colorScheme="green" onClick={incrementCounter}>
+            Tambah
+          </Button>
+        </HStack>
+        <Button width="400px" colorScheme="yellow" onClick={toggleCounter}>
+          Toggle Counter Visibility
+        </Button>
+      </Stack>
+      {/* </Flex> */}
+    </Box>
   )
 }
 
