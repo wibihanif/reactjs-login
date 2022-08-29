@@ -57,6 +57,17 @@ const Register = () => {
 
   const registerBtnHandler = () => {
     if (username.length >= 3 && email && password.length >= 8 && gender) {
+      for (let user of users) {
+        if (user.email === email || user.username === username) {
+          toast({
+            title: "Username or email has been used",
+            status: "error",
+          })
+
+          return
+        }
+      }
+
       setModalIsOpen(true)
 
       let newUser = {
@@ -67,6 +78,11 @@ const Register = () => {
       }
 
       setUsers([...users, newUser])
+
+      setUsername("")
+      setEmail("")
+      setPassword("")
+      setGender("")
     } else {
       toast({
         title: "Form is still invalid",
@@ -79,8 +95,15 @@ const Register = () => {
     setModalIsOpen(false)
   }
 
+  const deleteUserBtnHandler = (idx) => {
+    let tempUsers = [...users]
+    tempUsers.splice(idx, 1)
+
+    setUsers(tempUsers)
+  }
+
   const renderUsers = () => {
-    return users.map((val) => {
+    return users.map((val, idx) => {
       return (
         <Stack
           spacing={4}
@@ -92,7 +115,9 @@ const Register = () => {
           <Text>Email: {val.email}</Text>
           <Text>Password: {val.password}</Text>
           <Text>Gender: {val.gender}</Text>
-          <Button colorScheme="red">Delete</Button>
+          <Button onClick={() => deleteUserBtnHandler(idx)} colorScheme="red">
+            Delete
+          </Button>
         </Stack>
       )
     })
