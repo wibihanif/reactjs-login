@@ -11,9 +11,24 @@ import {
   RadioGroup,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react"
 import { useState } from "react"
 import RegisterModal from "../components/RegisterModal"
+
+// Condition form
+// 1. username harus 3 karakter atau lebih
+// 2. email harus terisi
+// 3. password harus 8 karakter atau lebih
+// 4. gender harus terisi
+
+// jika condition form tidak terpenuhi dan button
+// register di-click, tampilkan sebuah "TOAST" dengan
+// warna/scheme "error"
+
+// jika condition form terpenuhi, tampilkan modal
+
+//
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -25,12 +40,21 @@ const Register = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
+  const toast = useToast()
+
   const togglePassword = () => {
     setShowPassword(!showPassword)
   }
 
   const registerBtnHandler = () => {
-    setModalIsOpen(true)
+    if (username.length >= 3 && email && password.length >= 8 && gender) {
+      setModalIsOpen(true)
+    } else {
+      toast({
+        title: "Form is still invalid",
+        status: "error",
+      })
+    }
   }
 
   const closeModal = () => {
@@ -99,6 +123,13 @@ const Register = () => {
               Register
             </Button>
           </Stack>
+        </Box>
+        <Box border="1px solid black" padding="4">
+          <Text>Username: {username}</Text>
+          <Text>Email: {email}</Text>
+          <Text>Password: {password}</Text>
+          <Text>Gender: {gender}</Text>
+          <Button colorScheme="red">Delete</Button>
         </Box>
       </Box>
       <RegisterModal
