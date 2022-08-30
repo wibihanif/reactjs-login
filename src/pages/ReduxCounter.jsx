@@ -37,11 +37,11 @@ const ReduxCounter = () => {
   }
 
   const submitBtnHandler = () => {
-    // dispatch(overwriteValue(numInput))
-    dispatch({
-      type: "counter/overwriteValue",
-      payload: numInput,
-    })
+    dispatch(overwriteValue(Number(numInput)))
+    // dispatch({
+    //   type: "counter/overwriteValue",
+    //   payload: numInput,
+    // })
   }
 
   return (

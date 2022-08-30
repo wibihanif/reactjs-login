@@ -10,6 +10,7 @@ import { Text, UnorderedList, ListItem, Box } from "@chakra-ui/react"
 import Register from "./pages/Register"
 import ReduxCounter from "./pages/ReduxCounter"
 import { useSelector } from "react-redux"
+import Student from "./pages/Student"
 
 const data = [
   {
@@ -45,6 +46,7 @@ function App() {
   }
 
   const counterSelector = useSelector((state) => state.counter)
+  const studentSelector = useSelector((state) => state.student)
 
   return (
     <Box>
@@ -63,6 +65,11 @@ function App() {
           <Link to="/register">Register</Link>
         </ListItem>
       </UnorderedList>
+      <Box minHeight="56px" backgroundColor="teal" padding="4">
+        <Text fontSize="5xl" fontWeight="bold" color="white">
+          Total Students: {studentSelector.data.length}
+        </Text>
+      </Box>
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -72,6 +79,7 @@ function App() {
         <Route path="/filter" element={<Filter />} />
         <Route path="/register" element={<Register />} />
         <Route path="/redux/counter" element={<ReduxCounter />} />
+        <Route path="/redux/student" element={<Student />} />
       </Routes>
     </Box>
   )
