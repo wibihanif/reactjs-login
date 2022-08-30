@@ -8,6 +8,8 @@ import List from "./pages/List"
 import Filter from "./pages/Filter"
 import { Text, UnorderedList, ListItem, Box } from "@chakra-ui/react"
 import Register from "./pages/Register"
+import ReduxCounter from "./pages/ReduxCounter"
+import { useSelector } from "react-redux"
 
 const data = [
   {
@@ -42,8 +44,11 @@ function App() {
     return result
   }
 
+  const counterSelector = useSelector((state) => state.counter)
+
   return (
     <Box>
+      <Text>Counter: {counterSelector.value}</Text>
       <UnorderedList>
         <ListItem>
           <Link to="/home">Home</Link>
@@ -66,6 +71,7 @@ function App() {
         <Route path="/list" element={<List />} />
         <Route path="/filter" element={<Filter />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/redux/counter" element={<ReduxCounter />} />
       </Routes>
     </Box>
   )
