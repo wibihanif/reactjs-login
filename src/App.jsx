@@ -11,6 +11,7 @@ import Register from "./pages/Register"
 import ReduxCounter from "./pages/ReduxCounter"
 import { useSelector } from "react-redux"
 import Student from "./pages/Student"
+import UserList from "./pages/UserList"
 
 const data = [
   {
@@ -50,21 +51,6 @@ function App() {
 
   return (
     <Box>
-      <Text>Counter: {counterSelector.value}</Text>
-      <UnorderedList>
-        <ListItem>
-          <Link to="/home">Home</Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/about">About</Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/counter">Counter</Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/register">Register</Link>
-        </ListItem>
-      </UnorderedList>
       <Box minHeight="56px" backgroundColor="teal" padding="4">
         <Text fontSize="5xl" fontWeight="bold" color="white">
           Total Students: {studentSelector.data.length}
@@ -80,6 +66,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/redux/counter" element={<ReduxCounter />} />
         <Route path="/redux/student" element={<Student />} />
+        <Route path="/users" element={<UserList />} />
       </Routes>
     </Box>
   )
