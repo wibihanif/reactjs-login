@@ -13,6 +13,7 @@ import { useSelector } from "react-redux"
 import Student from "./pages/Student"
 import UserList from "./pages/UserList"
 import ProductList from "./pages/ProductList"
+import ProductEdit from "./pages/ProductEdit"
 
 const data = [
   {
@@ -69,6 +70,7 @@ function App() {
         <Route path="/redux/student" element={<Student />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/products" element={<ProductList />} />
+        <Route path="/products/:id" element={<ProductEdit />} />
       </Routes>
     </Box>
   )

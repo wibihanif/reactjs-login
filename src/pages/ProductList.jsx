@@ -21,6 +21,7 @@ import { useEffect, useState } from "react"
 import { jsonServerApi } from "../api"
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { Link } from "react-router-dom"
 
 const ProductList = () => {
   const [products, setProducts] = useState([])
@@ -58,9 +59,11 @@ const ProductList = () => {
           </Td>
           <Td>{val.stock}</Td>
           <Td>
-            <Button mx="1" colorScheme="green">
-              Edit
-            </Button>
+            <Link to={`/products/${val.id}`}>
+              <Button mx="1" colorScheme="green">
+                Edit
+              </Button>
+            </Link>
             <Button
               onClick={() => deleteBtnHandler(val.id)}
               mx="1"
