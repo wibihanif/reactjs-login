@@ -35,6 +35,16 @@ const ProductList = () => {
     }
   }
 
+  const deleteBtnHandler = async (id) => {
+    try {
+      await jsonServerApi.delete(`/products/${id}`)
+      fetchProducts()
+      toast({ title: "Product deleted", status: "info" })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const renderProducts = () => {
     return products.map((val) => {
       return (
@@ -47,6 +57,18 @@ const ProductList = () => {
             }).format(val.price)}
           </Td>
           <Td>{val.stock}</Td>
+          <Td>
+            <Button mx="1" colorScheme="green">
+              Edit
+            </Button>
+            <Button
+              onClick={() => deleteBtnHandler(val.id)}
+              mx="1"
+              colorScheme="red"
+            >
+              Delete
+            </Button>
+          </Td>
         </Tr>
       )
     })
@@ -144,6 +166,7 @@ const ProductList = () => {
             <Th>Product Name</Th>
             <Th>Price</Th>
             <Th>Stock</Th>
+            <Th>Action</Th>
           </Tr>
         </Thead>
         <Tbody>{renderProducts()}</Tbody>
