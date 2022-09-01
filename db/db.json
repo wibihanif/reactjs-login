@@ -18,5 +18,37 @@
       "price": 10000,
       "stock": 10
     }
+  ],
+  "employees": [
+    {
+      "name": "seto",
+      "email": "seto@mail.com",
+      "password": "password",
+      "id": 1
+    },
+    {
+      "name": "test123",
+      "email": "test@mail.com",
+      "password": "Password123!",
+      "id": 2
+    },
+    {
+      "name": "doraemon",
+      "email": "doraemon@mail.com",
+      "password": "Password123!@#",
+      "id": 3
+    },
+    {
+      "name": "ronaldo",
+      "email": "ronaldo@mail.com",
+      "password": "Password123#",
+      "id": 4
+    },
+    {
+      "name": "test123",
+      "email": "test@mail.com",
+      "password": "Password123#",
+      "id": 5
+    }
   ]
 }

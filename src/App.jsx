@@ -6,56 +6,49 @@ import Counter from "./pages/Counter"
 import TextPage from "./pages/Text"
 import List from "./pages/List"
 import Filter from "./pages/Filter"
-import { Text, UnorderedList, ListItem, Box } from "@chakra-ui/react"
+import { Text, UnorderedList, ListItem, Box, HStack } from "@chakra-ui/react"
 import Register from "./pages/Register"
 import ReduxCounter from "./pages/ReduxCounter"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Student from "./pages/Student"
 import UserList from "./pages/UserList"
 import ProductList from "./pages/ProductList"
 import ProductEdit from "./pages/ProductEdit"
-
-const data = [
-  {
-    fullName: "Naruto",
-    position: "Hokage",
-    age: 17,
-  },
-  {
-    fullName: "Doraemon",
-    position: "Kucing",
-    age: 100,
-  },
-  {
-    fullName: "Bill",
-    position: "CEO",
-    age: 40,
-  },
-]
+import EmployeeRegister from "./pages/EmployeeRegister"
+import EmployeeList from "./pages/EmployeeList"
+import { jsonServerApi } from "./api"
+import { fillEmployeeList } from "./features/employee/employeeSlice"
+import { useEffect } from "react"
 
 function App() {
-  const renderProfiles = () => {
-    let result = data.map((val) => {
-      return (
-        <Profile
-          fullName={val.fullName}
-          position={val.position}
-          age={val.age}
-        />
-      )
-    })
+  const employeeSelector = useSelector((state) => state.employee)
 
-    return result
+  const dispatch = useDispatch()
+
+  const fetchEmployees = async () => {
+    try {
+      const response = await jsonServerApi.get("/employees")
+
+      dispatch(fillEmployeeList(response.data))
+    } catch (err) {
+      console.log(err)
+      alert("Server error")
+    }
   }
 
-  const counterSelector = useSelector((state) => state.counter)
-  const studentSelector = useSelector((state) => state.student)
+  useEffect(() => {
+    fetchEmployees()
+  }, [])
 
   return (
     <Box>
       <Box minHeight="56px" backgroundColor="teal" padding="4">
+        <HStack color="white">
+          <Link to="/employees/register">Register</Link>
+          <Link to="/employees/list">List</Link>
+        </HStack>
         <Text fontSize="5xl" fontWeight="bold" color="white">
-          Total Students: {studentSelector.data.length}
+          Total Employee: {employeeSelector.data.length}
         </Text>
       </Box>
       <Routes>
@@ -73,6 +66,9 @@ function App() {
 
         {/* Route params */}
         <Route path="/products/:id" element={<ProductEdit />} />
+
+        <Route path="/employees/register" element={<EmployeeRegister />} />
+        <Route path="/employees/list" element={<EmployeeList />} />
       </Routes>
     </Box>
   )
