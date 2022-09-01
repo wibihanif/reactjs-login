@@ -70,6 +70,8 @@ function App() {
         <Route path="/redux/student" element={<Student />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/products" element={<ProductList />} />
+
+        {/* Route params */}
         <Route path="/products/:id" element={<ProductEdit />} />
       </Routes>
     </Box>

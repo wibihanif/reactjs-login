@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Container,
   FormControl,
@@ -16,6 +15,7 @@ import {
   Thead,
   Tr,
   useToast,
+  Link as ChakraLink,
 } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { jsonServerApi } from "../api"
