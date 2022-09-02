@@ -71,6 +71,7 @@ const EmployeeList = () => {
              "User with email does not exist". Lalu tampilkan toast (error)
           b. password salah, input password menjadi merah dengan message
              "Wrong password". Lalu tampilkan toast (error).
+        4. Buat button di navbar untuk LOGOUT
       */}
       <Box p="8" mb="8" borderRadius="6px" border="solid 1px lightgrey">
         <Text fontWeight="bold" fontSize="4xl" mb="8">
