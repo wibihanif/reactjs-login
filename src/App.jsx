@@ -55,10 +55,10 @@ function App() {
           </Text>
           <Box>
             <Text>Current Employee</Text>
-            <Text>ID: ...</Text>
-            <Text>Name: ...</Text>
-            <Text>Email: ...</Text>
-            <Text>Password: ...</Text>
+            <Text>ID: {employeeSelector.currentEmployee.id}</Text>
+            <Text>Name: {employeeSelector.currentEmployee.name}</Text>
+            <Text>Email: {employeeSelector.currentEmployee.email}</Text>
+            <Text>Password: {employeeSelector.currentEmployee.password}</Text>
           </Box>
         </HStack>
       </Box>

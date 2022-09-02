@@ -17,10 +17,20 @@ export const employeeSlice = createSlice({
     fillEmployeeList: (state, action) => {
       state.data = action.payload
     },
+    loginEmployee: (state, action) => {
+      const { name, email, password, id } = action.payload
+
+      state.currentEmployee = {
+        name,
+        email,
+        password,
+        id
+      }
+    }
   },
 })
 
-export const { fillEmployeeList } = employeeSlice.actions
+export const { fillEmployeeList, loginEmployee } = employeeSlice.actions
 
 export default employeeSlice.reducer
 

@@ -19,11 +19,13 @@ import {
 } from "@chakra-ui/react"
 import { useFormik } from "formik"
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { loginEmployee } from "../features/employee/employeeSlice"
 
 const EmployeeList = () => {
   const [showPassword, setShowPassword] = useState(false)
   const employeeSelector = useSelector((state) => state.employee)
+  const dispatch = useDispatch()
 
   const renderEmployees = () => {
     return employeeSelector.data.map((val) => {
@@ -33,7 +35,12 @@ const EmployeeList = () => {
           <Td>{val.email}</Td>
           <Td>{val.password}</Td>
           <Td>
-            <Button>Login</Button>
+            <Button
+              isDisabled={employeeSelector.currentEmployee.id === val.id}
+              onClick={() => dispatch(loginEmployee(val))}
+            >
+              Login
+            </Button>
           </Td>
         </Tr>
       )
@@ -54,7 +61,7 @@ const EmployeeList = () => {
 
   return (
     <Container maxW="container.lg" py="16">
-      <Box p="8" mb="8" borderRadius="6px" border="solid 1px lightgrey">
+      {/* <Box p="8" mb="8" borderRadius="6px" border="solid 1px lightgrey">
         <Text fontWeight="bold" fontSize="4xl" mb="8">
           Login Employee
         </Text>
@@ -93,7 +100,7 @@ const EmployeeList = () => {
           </FormControl>
           <Button colorScheme="green">Login</Button>
         </Stack>
-      </Box>
+      </Box> */}
       <Table>
         <Thead>
           <Tr>
