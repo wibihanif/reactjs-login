@@ -61,7 +61,18 @@ const EmployeeList = () => {
 
   return (
     <Container maxW="container.lg" py="16">
-      {/* <Box p="8" mb="8" borderRadius="6px" border="solid 1px lightgrey">
+      {/* 
+        1. Fitur login. Email dan password harus sesuai. Gunakan global
+           state untuk perbandingan data, tanpa network call tambahan.
+        2. Kalau login berhasil, tampilkan data di navbar. Tampilkan toast
+           (success)
+        3. Kalau login gagal, tampilkan message dengan case ini:
+          a. email tidak ditemukan, input email menjadi merah dengan message
+             "User with email does not exist". Lalu tampilkan toast (error)
+          b. password salah, input password menjadi merah dengan message
+             "Wrong password". Lalu tampilkan toast (error).
+      */}
+      <Box p="8" mb="8" borderRadius="6px" border="solid 1px lightgrey">
         <Text fontWeight="bold" fontSize="4xl" mb="8">
           Login Employee
         </Text>
@@ -100,7 +111,7 @@ const EmployeeList = () => {
           </FormControl>
           <Button colorScheme="green">Login</Button>
         </Stack>
-      </Box> */}
+      </Box>
       <Table>
         <Thead>
           <Tr>
