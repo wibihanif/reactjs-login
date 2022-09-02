@@ -19,6 +19,7 @@ import EmployeeList from "./pages/EmployeeList"
 import { jsonServerApi } from "./api"
 import { fillEmployeeList } from "./features/employee/employeeSlice"
 import { useEffect } from "react"
+import { increment } from "./features/counter/counterSlice"
 
 function App() {
   const employeeSelector = useSelector((state) => state.employee)
@@ -47,12 +48,22 @@ function App() {
           <Link to="/employees/register">Register</Link>
           <Link to="/employees/list">List</Link>
         </HStack>
-        <Text fontSize="5xl" fontWeight="bold" color="white">
-          Total Employee: {employeeSelector.data.length}
-        </Text>
+
+        <HStack>
+          <Text fontSize="5xl" fontWeight="bold" color="white">
+            Total Employee: {employeeSelector.data.length}
+          </Text>
+          <Box>
+            <Text>Current Employee</Text>
+            <Text>ID: ...</Text>
+            <Text>Name: ...</Text>
+            <Text>Email: ...</Text>
+            <Text>Password: ...</Text>
+          </Box>
+        </HStack>
       </Box>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/text" element={<TextPage />} />

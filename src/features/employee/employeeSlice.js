@@ -2,6 +2,12 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   data: [],
+  currentEmployee: {
+    name: "",
+    email: "",
+    password: "",
+    id: 0,
+  },
 }
 
 export const employeeSlice = createSlice({
@@ -10,7 +16,7 @@ export const employeeSlice = createSlice({
   reducers: {
     fillEmployeeList: (state, action) => {
       state.data = action.payload
-    }
+    },
   },
 })
 

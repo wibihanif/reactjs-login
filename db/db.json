@@ -49,6 +49,12 @@
       "email": "test@mail.com",
       "password": "Password123#",
       "id": 5
+    },
+    {
+      "name": "tambah",
+      "email": "tambah@mail.com",
+      "password": "Tambah#321",
+      "id": 6
     }
   ]
 }
