@@ -16,16 +16,19 @@ import {
   FormErrorMessage,
   InputGroup,
   InputRightElement,
-} from "@chakra-ui/react"
-import { useFormik } from "formik"
-import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { loginEmployee } from "../features/employee/employeeSlice"
+  useToast,
+} from "@chakra-ui/react";
+import { useFormik, Formik, Form, Field } from "formik";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginEmployee } from "../features/employee/employeeSlice";
+import { jsonServerApi } from "../api";
 
 const EmployeeList = () => {
-  const [showPassword, setShowPassword] = useState(false)
-  const employeeSelector = useSelector((state) => state.employee)
-  const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false);
+  const employeeSelector = useSelector((state) => state.employee);
+  const dispatch = useDispatch();
 
   const renderEmployees = () => {
     return employeeSelector.data.map((val) => {
@@ -43,21 +46,68 @@ const EmployeeList = () => {
             </Button>
           </Td>
         </Tr>
-      )
-    })
-  }
+      );
+    });
+  };
+
+  const toast = useToast();
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-  })
+    onSubmit: async ({ email, password }) => {
+      try {
+        let employee = {
+          email,
+          password,
+        };
+
+        console.log(employee);
+        const result = await jsonServerApi.get("/employees", employee);
+
+        console.log(result.data);
+        const employeeEmails = result.data.map((value) => {
+          return value.email;
+        });
+
+        console.log(employeeEmails);
+        // kondisi ketika email user tidak ada
+        if (employeeEmails.includes(employee.email)) {
+          let filteredEmployee = result.data.filter(
+            (element) => employee.email === element.email
+          );
+          console.log(filteredEmployee[0]);
+          // element utk ambil value setiap emailnya
+          if (filteredEmployee[0].password === employee.password) {
+            dispatch(loginEmployee(filteredEmployee[0]));
+            toast({ title: "Success", status: "success" });
+          } else {
+            toast({ title: "Wrong password", status: "error" });
+          }
+        } else {
+          toast({ title: "User with email does not exist", status: "error" });
+        }
+
+        // formik.setFieldValue("email", "");
+        // formik.setFieldValue("password", "");
+      } catch (err) {
+        console.log(err);
+        alert(err);
+      }
+    },
+  });
 
   const handleFormChange = ({ target }) => {
-    const { name, value } = target
-    formik.setFieldValue(name, value)
-  }
+    const { name, value } = target;
+    console.log(name, value);
+    formik.setFieldValue(name, value);
+  };
+
+  useEffect(() => {
+    console.log(employeeSelector.data);
+  }, [employeeSelector]);
 
   return (
     <Container maxW="container.lg" py="16">
@@ -78,6 +128,7 @@ const EmployeeList = () => {
           Login Employee
         </Text>
         <Stack>
+          {/* <Formik> */}
           <FormControl isInvalid={formik.errors.email}>
             <FormLabel>Email</FormLabel>
             <Input
@@ -110,7 +161,10 @@ const EmployeeList = () => {
             </InputGroup>
             <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
           </FormControl>
-          <Button colorScheme="green">Login</Button>
+          <Button colorScheme="green" onClick={formik.handleSubmit}>
+            Login
+          </Button>
+          {/* </Formik> */}
         </Stack>
       </Box>
       <Table>
@@ -124,8 +178,7 @@ const EmployeeList = () => {
         <Tbody>{renderEmployees()}</Tbody>
       </Table>
     </Container>
-  )
-}
+  );
+};
 
-export default EmployeeList
-
+export default EmployeeList;

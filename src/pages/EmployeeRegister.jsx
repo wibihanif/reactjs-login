@@ -10,29 +10,29 @@ import {
   InputRightElement,
   Stack,
   Text,
-} from "@chakra-ui/react"
-import { useFormik } from "formik"
-import { useState } from "react"
-import { jsonServerApi } from "../api"
-import * as Yup from "yup"
-import { useDispatch } from "react-redux"
-import { fillEmployeeList } from "../features/employee/employeeSlice"
+} from "@chakra-ui/react";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { jsonServerApi } from "../api";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { fillEmployeeList } from "../features/employee/employeeSlice";
 
 const EmployeeRegister = () => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const fetchEmployees = async () => {
     try {
-      const response = await jsonServerApi.get("/employees")
+      const response = await jsonServerApi.get("/employees");
 
-      dispatch(fillEmployeeList(response.data))
+      dispatch(fillEmployeeList(response.data));
     } catch (err) {
-      console.log(err)
-      alert("Server error")
+      console.log(err);
+      alert("Server error");
     }
-  }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -46,17 +46,17 @@ const EmployeeRegister = () => {
           name,
           email,
           password,
-        }
+        };
 
-        await jsonServerApi.post("/employees", newEmployee)
+        await jsonServerApi.post("/employees", newEmployee);
 
-        fetchEmployees()
-        formik.setFieldValue("name", "")
-        formik.setFieldValue("email", "")
-        formik.setFieldValue("password", "")
+        fetchEmployees();
+        formik.setFieldValue("name", "");
+        formik.setFieldValue("email", "");
+        formik.setFieldValue("password", "");
       } catch (err) {
-        console.log(err)
-        alert(err)
+        console.log(err);
+        alert(err);
       }
     },
     validationSchema: Yup.object({
@@ -70,17 +70,17 @@ const EmployeeRegister = () => {
         ),
     }),
     validateOnChange: false,
-  })
+  });
 
   const handleFormChange = ({ target }) => {
-    const { name, value } = target
+    const { name, value } = target;
 
-    formik.setFieldValue(name, value)
-  }
+    formik.setFieldValue(name, value);
+  };
 
   const togglePassword = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   return (
     <Container maxW="container.md" py="16">
@@ -131,8 +131,7 @@ const EmployeeRegister = () => {
         </Stack>
       </Box>
     </Container>
-  )
-}
+  );
+};
 
-export default EmployeeRegister
-
+export default EmployeeRegister;
